@@ -1,7 +1,7 @@
 
 # setup
-source("/work/zw122/LTN_analysis1/src/LTN/utils.R")
-result_dir = "/work/zw122/LTN_analysis1/results/application/"
+source("REPLACE_WITH_WORKDIR/src/LTN/utils.R")
+result_dir = "REPLACE_WITH_WORKDIR/results/application/"
 
 # group list
 dietcovariates=c("BF","Solid_Food","Eggs","Fish","Soy_Prod","Rye","Barley","Buckwheat_Millet")
