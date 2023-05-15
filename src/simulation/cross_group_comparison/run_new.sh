@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_teststat_ltn.R
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_roc_ltn.R
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_teststat_maaslin.R
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_roc_maaslin.R
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_teststat_dirfactor.R
+REPLACE_WITH_WORKDIR/src/simulation/cross_group_comparison/run_roc_dirfactor.R
