@@ -3,7 +3,7 @@ library(glue)
 # within_ind v norm -------------------------------------------------------
 
 within_ind = 1
-resdir = '/work/zw122/LTN_analysis1/cache/application/dirfactor/teststat/'
+resdir = 'REPLACE_WITH_WORKDIR/cache/application/dirfactor/teststat/'
 files = grep(paste0('within',within_ind,'r5iter1e\\+05_v_post_norm'), list.files(resdir, full.names = T), val = T)
 v_test1 = readRDS(grep('i0',files,val=T))
 v_null1 = sapply(files[-grep('i0',files,val=F)], readRDS)
@@ -12,7 +12,7 @@ mean(v_null1>=v_test1)
 # across_ind v norm -------------------------------------------------------
 
 within_ind = 0
-resdir = '/work/zw122/LTN_analysis1/cache/application/dirfactor/teststat/'
+resdir = 'REPLACE_WITH_WORKDIR/cache/application/dirfactor/teststat/'
 files = grep(paste0('within',within_ind,'r5iter1e\\+05_v_post_norm'), list.files(resdir, full.names = T), val = T)
 v_test0 = readRDS(grep('i0',files,val=T))
 v_null0 = sapply(files[-grep('i0',files,val=F)], readRDS)
@@ -30,11 +30,11 @@ abline(v = v_test0, col='red')
 # within_ind v -------------------------------------------------------
 
 within_ind = 1
-resdir = '/work/zw122/LTN_analysis1/cache/application/dirfactor/teststat/'
+resdir = 'REPLACE_WITH_WORKDIR/cache/application/dirfactor/teststat/'
 files = grep(paste0('within',within_ind,'r5iter1e\\+05_v_post\\.rds'), list.files(resdir, full.names = T), val = T)
 vec_test = readRDS(grep('i0',files,val=T))
 vec_null = sapply(files[-grep('i0',files,val=F)], readRDS)
 pval_otu = rowMeans(apply(vec_null,2,function(x) abs(vec_test)<=abs(x)))
 
-taxtab = readRDS("/work/zw122/LTN_analysis1/cache/diabimmune_taxtab_otu_100.rds")
+taxtab = readRDS("REPLACE_WITH_WORKDIR/cache/diabimmune_taxtab_otu_100.rds")
 taxtab[which(pval_otu == 0),]
