@@ -42,8 +42,20 @@ For the cross-group comparison simulation:
 4. Fit MaAsLin to the simulated datasets:
 - Generate a configuration csv file, containing a dataframe with two columns: input (the file name of dataset simulated in step 1), output (output directory). See "src/simulation/cross_group_comparison/MaAsLin2/config_maaslin.R" for an example. 
 - For each simulated dataset, run "src/simulation/cross_group_comparison/MaAsLin2/fit_v2.R" to fit DirFactor on each of the datasets. 
+5. Collect and visualize results with the rest of the code files in the "src/simulation/cross_group_comparison/" folder.
 
-### LTN
+Please replace the string "REPLACE_WITH_WORKDIR" in the code with the work directory. 
+
+## Case study: DIABIMMUNE 
+
+- "src/application/application_005.R": Fit LTN mixed effects model to the DIABIMMUNE data.
+- "src/application/dirfactor_perm.R": Fit DirFactor to the DIABIMMUNE data.
+- "src/application/dirfactor_results.R": Collect results from DirFactor.
+- "src/application/maaslin_application_default.R": Fit MaAsLin to the DIABIMMUNE data and visualize the comparison between LTN and MaAsLin. 
+
+Please replace the string "REPLACE_WITH_WORKDIR" in the code with the work directory. 
+
+
 
 
 
