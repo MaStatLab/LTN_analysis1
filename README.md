@@ -1,6 +1,6 @@
 # Description
 
-This repository contains all datasets and source code needed to reproduce the simulation examples and case study in "Microbiome compositional analysis with logistic-tree normal models".
+This repository contains all datasets and source code needed to reproduce the simulation examples and case study in "Differential abundance analysis for microbiome compositions with logistic-tree normal models".
 
 The folder "res" contains the raw data.
 
