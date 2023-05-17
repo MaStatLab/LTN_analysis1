@@ -11,6 +11,8 @@ The folder "src" contains the source code.
 
 The simulation study and case study were run on a computing cluster with SLURM job scheduler.
 
+The data used in case study is available at https://diabimmune.broadinstitute.org/diabimmune/t1d-cohort. 
+
 # Workflow
 
 Set up the work directory first. 
