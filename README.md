@@ -41,9 +41,9 @@ For the cross-group comparison simulation:
 3. Fit DirFactor to the simulated datasets:
 - Generate a configuration csv file, containing a dataframe with two columns: input (the file name of dataset simulated in step 1), output (output directory). See "src/simulation/cross_group_comparison/dirfactor/config_dirfactor.R" for an example. 
 - For each simulated dataset, run "src/simulation/cross_group_comparison/dirfactor/fit_dirfactor_v2.R" to fit DirFactor on each of the datasets. (This step were run on a computing cluster with SLURM job scheduler.)
-4. Fit MaAsLin to the simulated datasets:
+4. Fit MaAsLin2 to the simulated datasets:
 - Generate a configuration csv file, containing a dataframe with two columns: input (the file name of dataset simulated in step 1), output (output directory). See "src/simulation/cross_group_comparison/MaAsLin2/config_maaslin.R" for an example. 
-- For each simulated dataset, run "src/simulation/cross_group_comparison/MaAsLin2/fit_v2.R" to fit DirFactor on each of the datasets. 
+- For each simulated dataset, run "src/simulation/cross_group_comparison/MaAsLin2/fit_v2.R" to fit MaAsLin2 on each of the datasets. 
 5. Collect and visualize results with the rest of the code files in the "src/simulation/cross_group_comparison/" folder.
 
 Please replace the string "REPLACE_WITH_WORKDIR" in the code with the work directory. 
