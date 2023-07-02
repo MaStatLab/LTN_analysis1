@@ -33,7 +33,7 @@ cat("save to: ", result_dir, "/", result_filename, '\n')
 teststat = - sapply(files, function(x){
   if (file.exists(x)){
     res = read.csv(x,sep='\t')
-    return(min(res[res$metadata == "Xtest", "qval"]))
+    return(min(p.adjust(p = res[res$metadata == "Xtest", "pval"], method = "BH")))
   }else{
     return(NA)
   }
