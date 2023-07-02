@@ -47,8 +47,9 @@ if (H == "H0"){
 d = data.frame(d = colSums(otu_table(sim)) != colSums(otu_table(H0)))
 # obtain d hat
 res = read.csv(files[i],sep='\t')
-res = res[res$metadata == "Xtest", c("feature", "qval")]
-res$d_hat = res$qval <= fdr_target
+res = res[res$metadata == "Xtest", c("feature", "pval")]
+res$d_hat = p.adjust(p = res$pval, method = 'BH') <= fdr_target
+# res$d_hat = res$qval <= fdr_target
 res$d = d[gsub('X', '', res$feature),]
 if (sum(res$d_hat) > 0){
   fdr = sum(res$d_hat*(1-res$d))/sum(res$d_hat)
