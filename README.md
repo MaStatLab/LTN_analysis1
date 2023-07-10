@@ -53,7 +53,7 @@ Please replace the string "REPLACE_WITH_WORKDIR" in the code with the work direc
 - "src/application/application_005.R": Fit LTN mixed effects model to the DIABIMMUNE data.
 - "src/application/dirfactor_perm.R": Fit DirFactor to the DIABIMMUNE data.
 - "src/application/dirfactor_results.R": Collect results from DirFactor.
-- "src/application/maaslin_application_default.R": Fit MaAsLin to the DIABIMMUNE data and visualize the comparison between LTN and MaAsLin. 
+- "src/application/maaslin_application_default_BHgroup.R": Fit MaAsLin to the DIABIMMUNE data and visualize the comparison between LTN and MaAsLin. 
 
 Please replace the string "REPLACE_WITH_WORKDIR" in the code with the work directory. 
 
