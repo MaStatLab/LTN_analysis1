@@ -12,13 +12,14 @@
 
 gibbs_glasso_hp_cov_mu=function(niter,YL,Y,r=1,s=0.01,SEED=1,lambda=NULL,hp_cov_mu=NULL,verbose=F, cache_dir = ''){
 	if (length(cache_dir) > 0){
-system(paste0('mkdir -p ', cache_dir))
+	system(paste0('mkdir -p ', cache_dir))
 	}
   #initialization
   set.seed(SEED)
   LAM=rep(0,niter)
   if (is.null(lambda)){
     lambda=stats::rgamma(1,r,s)
+    lambda_hp = TRUE
   }
   LAM[1]=lambda
   nsim=ncol(Y)
@@ -33,7 +34,7 @@ system(paste0('mkdir -p ', cache_dir))
   set.seed(SEED)
   OMEGA[[1]]=stats::rWishart(1,p+2,PHI)[,,1]
   omega=OMEGA[[1]]
-  TAU=list()
+  # TAU=list()
   tau=matrix(0,nrow=p,ncol=p)
   set.seed(SEED)
   for (l in 2:p){
@@ -44,7 +45,7 @@ system(paste0('mkdir -p ', cache_dir))
       tau[l,k]=1/ukl
     }
   }
-  TAU[[1]]=tau
+  # TAU[[1]]=tau
   PSI=list()
   set.seed(SEED)
   psi=matrix(0,ncol = ncol(Y),nrow=nrow(Y))
@@ -69,7 +70,7 @@ system(paste0('mkdir -p ', cache_dir))
       }
     }
   }
-  PSI[[1]]=psi
+  # PSI[[1]]=psi
   if (is.null(hp_cov_mu)){
     Lam = diag(rep(5,p))
   }
@@ -99,8 +100,8 @@ system(paste0('mkdir -p ', cache_dir))
     # print(it)
     lambda=LAM[it-1]
     omega=OMEGA[[it-1]]
-    psi=PSI[[it-1]]
-    tau=TAU[[it-1]]
+    # psi=PSI[[it-1]]
+    # tau=TAU[[it-1]]
     mu=MU[,it-1]
     #update z
     z=matrix(0,ncol=nsim,nrow=p)
@@ -140,13 +141,13 @@ z_na = c(z_na,list(j=j,i=i,z=z[j,i],para1=as.numeric(Y[j,i]),para2=psi[j,i]))
     mean_vec=cov_mat%*%(omega%*%mu+kappa[,i])
       psi[,i]=mvtnorm::rmvnorm(1,mean_vec,cov_mat)
     }
-    PSI[[it]]=psi
+    # PSI[[it]]=psi
     #update mu
     cov_mat=chol2inv(chol(chol2inv(chol(Lam))+nsim*omega))
     mean_vec=cov_mat%*%omega%*%apply(psi,1,sum)
     MU[,it]=mvtnorm::rmvnorm(1,mean_vec,cov_mat)
     mu=MU[,it]
-if (length(cache_dir) > 0){
+    if (length(cache_dir) > 0){
     saveRDS(mu, paste0(cache_dir, '/mu', it, '.rds'))
     }
     #update omega and tau together (blocked gibbs)
@@ -179,7 +180,7 @@ if (length(cache_dir) > 0){
     }
     OMEGA[[it]]=omega
     # TAU[[it]]=tau
-    if (length(cache_dir) > 0){
+            if (length(cache_dir) > 0){
     saveRDS(omega, paste0(cache_dir, '/omega', it, '.rds'))
     }
 
@@ -188,6 +189,7 @@ if (length(cache_dir) > 0){
       lambda=stats::rgamma(1,r+p*(p+1)/2,s+sum(abs(omega))/2)
     }
     LAM[it]=lambda
+    print(lambda)
   }
   return(list(OMEGA=OMEGA,LAM=LAM,MU=MU))
 }
