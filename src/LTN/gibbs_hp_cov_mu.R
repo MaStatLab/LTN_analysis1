@@ -10,11 +10,14 @@
 #' @param hp_cov_mu prior covariance for mu
 #' @param verbose if TRUE, print number of iterations
 
-gibbs_glasso_hp_cov_mu=function(niter,YL,Y,r=1,s=0.01,SEED=1,lambda='hp',hp_cov_mu=NULL,verbose=F){
+gibbs_glasso_hp_cov_mu=function(niter,YL,Y,r=1,s=0.01,SEED=1,lambda=NULL,hp_cov_mu=NULL,verbose=F, cache_dir = ''){
+	if (length(cache_dir) > 0){
+system(paste0('mkdir -p ', cache_dir))
+	}
   #initialization
   set.seed(SEED)
   LAM=rep(0,niter)
-  if (lambda=='hp'){
+  if (is.null(lambda)){
     lambda=stats::rgamma(1,r,s)
   }
   LAM[1]=lambda
@@ -143,6 +146,9 @@ z_na = c(z_na,list(j=j,i=i,z=z[j,i],para1=as.numeric(Y[j,i]),para2=psi[j,i]))
     mean_vec=cov_mat%*%omega%*%apply(psi,1,sum)
     MU[,it]=mvtnorm::rmvnorm(1,mean_vec,cov_mat)
     mu=MU[,it]
+if (length(cache_dir) > 0){
+    saveRDS(mu, paste0(cache_dir, '/mu', it, '.rds'))
+    }
     #update omega and tau together (blocked gibbs)
     psi_diff=psi-matrix(rep(mu,nsim),ncol=nsim,byrow=F)
     S=psi_diff%*%t(psi_diff)
@@ -172,8 +178,12 @@ z_na = c(z_na,list(j=j,i=i,z=z[j,i],para1=as.numeric(Y[j,i]),para2=psi[j,i]))
       }
     }
     OMEGA[[it]]=omega
-    TAU[[it]]=tau
-    if (lambda=='hp'){
+    # TAU[[it]]=tau
+    if (length(cache_dir) > 0){
+    saveRDS(omega, paste0(cache_dir, '/omega', it, '.rds'))
+    }
+
+    if (lambda_hp){
       # update lambda
       lambda=stats::rgamma(1,r+p*(p+1)/2,s+sum(abs(omega))/2)
     }
