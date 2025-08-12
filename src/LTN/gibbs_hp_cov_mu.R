@@ -20,6 +20,8 @@ gibbs_glasso_hp_cov_mu=function(niter,YL,Y,r=1,s=0.01,SEED=1,lambda=NULL,hp_cov_
   if (is.null(lambda)){
     lambda=stats::rgamma(1,r,s)
     lambda_hp = TRUE
+  } else {
+     lambda_hp = FALSE
   }
   LAM[1]=lambda
   nsim=ncol(Y)
